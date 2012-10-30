@@ -2,12 +2,29 @@
 <html>
 <head>
   <title>Littlehoshi</title>
+  <%= google_webfonts_link_tag :sue_ellen_francisco %>
+  <%= google_webfonts_link_tag :raleway=>[200,300,600] %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+	<div id="pagecontainer">
+		<div id="top">
+			<div id="leftpanel">
+				<div id="logobox">
+					<span id="logo">Little Hoshi</span>
+					<span id="deemph_tagline">(Educationally Enriching)</span>
+					<span id="emph_tagline">Activity Boxes</span>
+				</div>
+			</div>
+		</div>
+		<div id="bottom">
+			
+		</div>
+	</div>
+	
 <%= yield %>
 
 </body>
