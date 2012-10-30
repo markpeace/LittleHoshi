@@ -1,0 +1,39 @@
+#pagecontainer {
+	position:absolute;
+	top:10px; bottom:50px;
+	left:75px; right:75px;	
+	font-family: Raleway;
+	font-weight: 200;
+	font-size: .8em;
+	
+	#top {
+		height:50%; width:100%;
+		#leftpanel {
+			width:250px;	 height:100%;
+			position:relative;
+			#logobox {
+				width:100%; 
+				position:absolute;
+				bottom:0%;	
+
+				#logo {
+					display: block;
+					font-family: Sue Ellen Francisco;
+					font-size:6em;
+					line-height:1em;
+				}
+				
+				#emph_tagline {
+					font-weight: 600;
+				}
+			
+			}
+		}
+	}
+
+	#bottom {
+		height:50%; width:100%;
+	}
+
+
+}
