@@ -10,22 +10,23 @@
 </head>
 <body>
 
-	<div id="pagecontainer">
-		<div id="top">
-			<div id="leftpanel">
-				<div id="logobox">
-					<span id="logo">Little Hoshi</span>
-					<span id="deemph_tagline">(Educationally Enriching)</span>
-					<span id="emph_tagline">Activity Boxes</span>
-				</div>
+<div class="container <%= 'showgrid' if Rails.env.development? %>">
+	
+	<div class="span-24 last"></div>
+		<div class="span-1">&nbsp;</div>
+		<div class="span-6 last">
+			<h1>Little Hoshi</h1>
+			<h2>(Educationally Enriching) <b>Activity Boxes</b></h2>
+			<div class="comingsoon">
+				Activity boxes for children.<br />
+				Curated by an educationalist and designed for fun!<br />
+				Coming soon!
 			</div>
-		</div>
-		<div id="bottom">
-			
 		</div>
 	</div>
 	
-<%= yield %>
+	<%= 	yield %>
+</div>
 
 </body>
 </html>
