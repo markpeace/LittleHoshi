@@ -1,39 +1,29 @@
-#pagecontainer {
-	position:absolute;
-	top:10px; bottom:50px;
-	left:75px; right:75px;	
-	font-family: Raleway;
+.showgrid { background:url('/assets/grid.png'); }
+.fill1 { background-color: blue; }
+
+body {
+	font-family:Raleway;
+	font-weight:200;
+	font-size: .7em;	
+}
+
+h1 {
+	font-family: Sue Ellen Francisco;
+	font-size: 5.8em;
+	line-height: 1em;
+	margin-bottom: 0px;
+	padding-top:200px;
+}
+
+h2 {
+	padding-top: 0px;
+	font-size: 1em;
 	font-weight: 200;
-	font-size: .8em;
-	
-	#top {
-		height:50%; width:100%;
-		#leftpanel {
-			width:250px;	 height:100%;
-			position:relative;
-			#logobox {
-				width:100%; 
-				position:absolute;
-				bottom:0%;	
+	line-height: 1em;
+	b { font-weight:600; padding-left: 0px; }
+}
 
-				#logo {
-					display: block;
-					font-family: Sue Ellen Francisco;
-					font-size:6em;
-					line-height:1em;
-				}
-				
-				#emph_tagline {
-					font-weight: 600;
-				}
-			
-			}
-		}
-	}
-
-	#bottom {
-		height:50%; width:100%;
-	}
-
-
+.comingsoon{
+	padding-top:60px;
+	width: 275px;
 }
