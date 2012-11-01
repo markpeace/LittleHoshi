@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div class="container <%= 'showgrid' if Rails.env.development? %>">
+<div class="container <%= 'showgrid' if Rails.env.development? or params.has_key?(:showgrid) %>">
 	
 	<div class="span-24 last"></div>
 		<div class="span-1">&nbsp;</div>
