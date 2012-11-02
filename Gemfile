@@ -22,6 +22,7 @@ gem 'therubyracer'
 gem 'jquery-rails'
 
 #Formatting
+gem 'haml-rails'
 gem 'google-webfonts'
 gem 'blueprint-rails'
 

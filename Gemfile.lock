@@ -45,6 +45,12 @@ GEM
       multi_json (~> 1.0)
     google-webfonts (0.1.2)
       actionpack (>= 3.0.0)
+    haml (3.1.7)
+    haml-rails (0.3.4)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      haml (~> 3.0)
+      railties (~> 3.0)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -116,6 +122,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   execjs
   google-webfonts
+  haml-rails
   jquery-rails
   pg
   rails (= 3.2.8)

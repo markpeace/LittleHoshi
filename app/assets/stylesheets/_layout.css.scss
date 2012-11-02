@@ -6,23 +6,28 @@ body {
 	font-weight:200;
 }
 
-h1 {
-	font-family: Sue Ellen Francisco;
-	font-size: 6em;
-	line-height: 1em;
-	margin-bottom: 0px;
-	padding-top:200px;
-}
+#logo {
+	padding-top:105px;
+	height:500px;
+	text-align: center;
+	img {
+		width:92px;
+		height:92px;	
+		margin:20px;
+	}
+	h1 {
+		font-family: Sue Ellen Francisco;
+		font-size: 6em;
+		line-height: 1em;
+		margin-bottom: 0px;
 
-h2 {
-	padding-top: 0px;
-	font-size: 1em;
-	font-weight: 200;
-	line-height: 1em;
-	b { font-weight:600; }
-}
+	}
 
-.comingsoon{
-	padding-top:49px;
-	width: 275px;
+	h2 {
+		padding-top: 0px;
+		font-size: 1em;
+		font-weight: 200;
+		line-height: 1em;
+		b { font-weight:600; }
+	}
 }

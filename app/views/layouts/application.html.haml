@@ -1,0 +1,22 @@
+%html
+	%head
+		%title Little Hoshi
+		= google_webfonts_link_tag :sue_ellen_francisco
+		= google_webfonts_link_tag :raleway=>[200,300,600]
+		= stylesheet_link_tag    "application", :media => "all"
+		= javascript_include_tag "application"
+		= csrf_meta_tags
+	%body
+		.container{:class=>"#{'showgrid' if params.has_key?(:showgrid)}"}
+			.span-24.last
+				.span-1 &nbsp;
+				#logo.span-6.colborder 
+					=image_tag "/images/watercolour_star.jpg"
+					%h1 Little Hoshi
+					%h2 
+						(Educationally Enriching) 
+						%b Activity Boxes
+					%br
+					%br
+					%br
+						
