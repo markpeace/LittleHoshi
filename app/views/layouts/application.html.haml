@@ -6,7 +6,7 @@
 		= stylesheet_link_tag    "application", :media => "all"
 		= javascript_include_tag "application"
 		= csrf_meta_tags
-	%body
+	%body{:id=>"#{controller.controller_name}_#{controller.action_name}"}
 		.container{:class=>"#{'showgrid' if params.has_key?(:showgrid)}"}
 			.span-24.last
 				.span-1 &nbsp;
@@ -19,4 +19,14 @@
 					%br
 					%br
 					%br
-						
+				.span-15
+					%br
+					#navbar.span-15.last
+						.span-5 &nbsp;
+						.span-2=link_to "Home", root_path
+						.span-2=link_to "The Boxes", "/boxes"
+						.span-2=link_to "Pricing", "/pricing"
+						.span-2=link_to "Login", root_path
+						.span.last-2=link_to "Register", root_path
+					#yield.span-15.last=yield
+				.span-1.last &nbsp;

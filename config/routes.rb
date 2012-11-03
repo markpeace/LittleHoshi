@@ -1,4 +1,5 @@
 Littlehoshi::Application.routes.draw do
-  get "splash/index"
-	root :to=>"splash#index"
+  get "boxes"=>"splash#theboxes"
+  get "pricing"=>"splash#pricing"
+  root :to=>"splash#index"
 end
