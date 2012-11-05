@@ -17,6 +17,13 @@ class User < ActiveRecord::Base
 	def password_changed?
 		Proc.new { @password.blank? }
 	end
+
+	def self.authenticate(email, password)
+		u=User.find_by_email(email)
+		return false if u.nil?
+		return false if u.hashed_password!=BCrypt::Password.create(password)
+		return u
+	end
 	
 	private
     def hash_new_password

@@ -33,9 +33,19 @@ describe User do
 	end
 	
 	describe "is the basis for authentication so it" do
-		it "should allow login for correct username and password"
-		it "should return an error when username is not found"
-		it "should return an error when username and password do not match"
+		before(:each) do 
+			@u=FactoryGirl.create(:user)
+		end
+		
+		it "should allow login for correct username and password" do
+			User.authenticate(@u.email, @u.password).should_not be_nil
+		end
+		it "should return an error when email is not found" do
+			User.authenticate("wrong@email.com", @u.password).should_not be_nil
+		end
+		it "should return an error when username and password do not match" do
+			User.authenticate(@u.email, "wrong password").should_not be_nil
+		end
 	end
 
 end
