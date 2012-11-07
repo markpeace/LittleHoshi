@@ -41,10 +41,10 @@ describe User do
 			User.authenticate(@u.email, @u.password).should_not be_nil
 		end
 		it "should return an error when email is not found" do
-			User.authenticate("wrong@email.com", @u.password).should_not be_nil
+			User.authenticate("wrong email", @u.password).should be_nil
 		end
 		it "should return an error when username and password do not match" do
-			User.authenticate(@u.email, "wrong password").should_not be_nil
+			User.authenticate(@u.email, "wrong password").should be_nil
 		end
 	end
 

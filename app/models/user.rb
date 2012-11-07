@@ -18,11 +18,10 @@ class User < ActiveRecord::Base
 		Proc.new { @password.blank? }
 	end
 
-	def self.authenticate(email, password)
-		u=User.find_by_email(email)
-		return false if u.nil?
-		return false if u.hashed_password!=BCrypt::Password.create(password)
-		return u
+	def self.authenticate(email,password)
+		return nil unless u=User.find_by_email(email)
+		return nil unless BCrypt::Password.new(u.hashed_password).is_password? password
+		u
 	end
 	
 	private
