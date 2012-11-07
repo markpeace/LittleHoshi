@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :hashed_password
 	  t.boolean :is_admin
+	  t.boolean :registration_of_interest, :default=>false
 
       t.timestamps
     end

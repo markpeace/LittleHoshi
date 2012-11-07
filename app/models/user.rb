@@ -1,7 +1,7 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-	attr_accessible :email, :password, :password_confirmation, :is_admin
+	attr_accessible :email, :password, :password_confirmation, :is_admin, :registration_of_interest
 	attr_accessor :password, :password_confirmation
 
 	validates_presence_of :email
