@@ -25,11 +25,8 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
+	@user.registration_token = params[:registration_token]
+	render :new_registration_of_interest unless @user.registration_token
   end
 
   # GET /users/1/edit

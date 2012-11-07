@@ -1,0 +1,6 @@
+%h3 Register Your Interest 
+%p To ensure that we can maintain the quality of Little Hoshi boxes, we currently take new registrations by invitation only. You can, however, signal your interest by providing your email address below. As soon as we can accomodate new customers, we'll send you an invite.
+=simple_form_for @user do |f|
+	=f.input :email
+	=f.submit
+		

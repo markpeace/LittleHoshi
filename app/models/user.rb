@@ -1,25 +1,35 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-	attr_accessible :email, :password, :password_confirmation, :is_admin, :registration_of_interest
-	attr_accessor :password, :password_confirmation
+	attr_accessible :email, :password, :password_confirmation, :is_admin, :registration_of_interest, :invitation_token
+	attr_accessor :password, :password_confirmation, :invitation_token
 
 	validates_presence_of :email
 	validates_uniqueness_of :email
 	validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 	
-	validates_presence_of :password, :on=>:create
-	validates_length_of :password, :in=>5..15
-	validates_confirmation_of :password, :if=>:password_changed?
+	validates_presence_of :password, :on=>:create, :if=>:check_invitation_token?
+	validates_length_of :password, :in=>5..15, :if=>:check_invitation_token?
+	validates_confirmation_of :password, :if=>Proc.new{password_changed? && check_invitation_token? }
 	
 	before_save :hash_new_password, :if=>:password_changed?
 	
 	def password_changed?
 		Proc.new { @password.blank? }
 	end
+	
+	def check_invitation_token? 
+		if self.invitation_token==nil then
+			self.registration_of_interest=true
+			return false
+		else
+			self.errors.add(:base, "Invalid Invitation Token") unless self.invitation_token=="testtoken"
+			return true
+		end
+	end
 
 	def self.authenticate(email,password)
-		return nil unless u=User.find_by_email(email)
+		return nil unless u=User.where(:email=>email, :registration_of_interest=>false).first
 		return nil unless BCrypt::Password.new(u.hashed_password).is_password? password
 		u
 	end

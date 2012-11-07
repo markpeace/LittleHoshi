@@ -3,8 +3,21 @@ require 'spec_helper'
 describe User do
 
 	it "should create when valid" do
-		FactoryGirl.build(:user).should be_valid
+		u=FactoryGirl.create(:user)
+		u.should be_valid
+		u.registration_of_interest.should be_false
 	end
+	
+	describe "It uses a invitation token for full registration, so it" do
+		it "should create a registration of interest if one isn't provided" do
+			u=FactoryGirl.create(:user, invitation_token:nil)
+			u.should be_valid
+			u.registration_of_interest.should be_true
+		end
+		it "should raise an error if the token is invalid" do
+			FactoryGirl.build(:user, invitation_token:"wrong").should_not be_valid
+		end
+	end 
 
 	describe "requires an email address, so it" do
 		it "should raise an error when not provided" do
@@ -45,6 +58,11 @@ describe User do
 		end
 		it "should return an error when username and password do not match" do
 			User.authenticate(@u.email, "wrong password").should be_nil
+		end
+		it "should return an error when a user tries to log in to a registration of interest" do
+			@u.registration_of_interest=true
+			@u.save
+			User.authenticate(@u.email, @u.password).should be_nil
 		end
 	end
 
