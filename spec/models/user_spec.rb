@@ -1,11 +1,19 @@
-require 'spec_helper'
+	require 'spec_helper'
 
 describe User do
-
-	it "should create when valid" do
-		u=FactoryGirl.create(:user)
-		u.should be_valid
-		u.registration_of_interest.should be_false
+	
+	describe "It should create a user, so it" do
+		before :each do
+			@i=FactoryGirl.create(:invitation, uses:2)
+			@u=FactoryGirl.create(:user, invitation_token:@i.token)
+		end 
+		it "should create when valid" do
+			@u.should be_valid
+			@u.registration_of_interest.should be_false
+		end
+		it "should consume a token" do
+			Invitation.last.uses.should eq(1)
+		end
 	end
 	
 	describe "It uses a invitation token for full registration, so it" do
@@ -27,8 +35,8 @@ describe User do
 			FactoryGirl.build(:user, email:"markpeace.com").should_not be_valid
 		end
 		it "should raise an error when duplicated" do
-			FactoryGirl.create(:user).should be_valid
-			FactoryGirl.build(:user).should_not be_valid
+			FactoryGirl.create(:user, email:"junkyjunk@junkyjunkjunk.com").should be_valid
+			FactoryGirl.build(:user, email:"junkyjunk@junkyjunkjunk.com").should_not be_valid
 		end
 	end
 	
@@ -40,10 +48,14 @@ describe User do
 			FactoryGirl.build(:user, password:"s", password_confirmation:"s").should_not be_valid
 			FactoryGirl.build(:user, password:"thispasswordisfartoolong", password_confirmation:"thispasswordisfartoolong").should_not be_valid
 		end
-		it "should raise an error when password and confirmation dont match" do 
+		it "should raise an error when password and confirmation dont match" do
 			FactoryGirl.build(:user, password:"password1", password_confirmation:"password2").should_not be_valid
 		end
-	end
+	end 
+	
+	describe "it should consume a token"
+	
+	describe "it should resume a registration on the basis of a registration of interest"
 	
 	describe "is the basis for authentication so it" do
 		before(:each) do 

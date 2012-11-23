@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 	attr_accessible :email, :password, :password_confirmation, :is_admin, :registration_of_interest, :invitation_token
 	attr_accessor :password, :password_confirmation, :invitation_token
 
+	has_one :invitation, :primary_key=>:token, :foreign_key=>:invitation_token
+
 	validates_presence_of :email
 	validates_uniqueness_of :email
 	validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
@@ -13,6 +15,7 @@ class User < ActiveRecord::Base
 	validates_confirmation_of :password, :if=>Proc.new{password_changed? && check_invitation_token? }
 	
 	before_save :hash_new_password, :if=>:password_changed?
+	after_create :consume_token
 	
 	def password_changed?
 		Proc.new { @password.blank? }
@@ -23,9 +26,15 @@ class User < ActiveRecord::Base
 			self.registration_of_interest=true
 			return false
 		else
-			self.errors.add(:base, "Invalid Invitation Token") unless self.invitation_token=="testtoken"
+			self.errors.add(:base, "Invalid Invitation Token") unless Invitation.find_by_token(self.invitation_token)
 			return true
 		end
+	end
+
+	def consume_token
+		return unless i=Invitation.find_by_token(self.invitation_token)
+		i.uses=i.uses-1
+		i.save
 	end
 
 	def self.authenticate(email,password)

@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :invitation do
-    token "MyString"
-    count 1
-    notes "MyString"
+    uses 1
+    notes "This is a test invitation"
   end
 end
