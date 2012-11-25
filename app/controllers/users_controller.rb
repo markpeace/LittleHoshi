@@ -25,8 +25,9 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-	@user.registration_token = params[:registration_token]
-	render :new_registration_of_interest unless @user.registration_token
+	@user.invitation_token = params[:token]
+	@user.invitation_token = nil unless Invitation.find_by_token(@user.invitation_token)
+	render :new_registration_of_interest unless @user.invitation_token
   end
 
   # GET /users/1/edit
@@ -39,15 +40,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    respond_to do |format|
       if @user.save
-        format.html { redirect_to "/login", notice: 'You have successfully registered, enter your details below to log in' }
-        format.json { render json: @user, status: :created, location: @user }
+		redirect_to "/login", notice: 'You have successfully registered, enter your details below to log in'
+		render json: @user, status: :created, location: @user
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        return render :new if @user.invitation_token
+        return render :new_registration_of_interest unless @user.invitation_token
       end
-    end
   end
 
   # PUT /users/1
