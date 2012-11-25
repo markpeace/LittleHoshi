@@ -1,4 +1,4 @@
-	require 'spec_helper'
+require 'spec_helper'
 
 describe User do
 	
@@ -6,13 +6,17 @@ describe User do
 		before :each do
 			@i=FactoryGirl.create(:invitation, uses:2)
 			@u=FactoryGirl.create(:user, invitation_token:@i.token)
-		end 
+		end
 		it "should create when valid" do
 			@u.should be_valid
 			@u.registration_of_interest.should be_false
 		end
 		it "should consume a token" do
 			Invitation.last.uses.should eq(1)
+		end
+		it "should send a confirmation email" do
+			ActionMailer::Base.deliveries.last.to.should == [@u.email]
+			ActionMailer::Base.deliveries.last.subject.should == "Welcome to Little Hoshi"
 		end
 	end
 	
@@ -22,6 +26,12 @@ describe User do
 			u.should be_valid
 			u.registration_of_interest.should be_true
 		end
+		it "should send a holding email" do
+			u=FactoryGirl.create(:user, invitation_token:nil)
+			ActionMailer::Base.deliveries.last.to.should == [u.email]
+			ActionMailer::Base.deliveries.last.subject.should == "You will be invited to join Little Hoshi soon..."
+		end
+
 		it "should raise an error if the token is invalid" do
 			FactoryGirl.build(:user, invitation_token:"wrong").should_not be_valid
 		end

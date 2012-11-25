@@ -30,6 +30,11 @@ describe Invitation do
 			Invitation.count.should equal(1)
 			Invitation.first.notes.should eq("for junker.junk@junkerjunkjunk.com")
 		end
+		it "should send an email when people have been invited" do
+			Invitation.to_user("junker.junk@junkerjunkjunk.com")
+			ActionMailer::Base.deliveries.last.to.should == ["junker.junk@junkerjunkjunk.com"]
+			ActionMailer::Base.deliveries.last.subject.should == "You have been invited to join Little Hoshi"
+		end
 		it "shouldn't create a registration of interest if an email is already logged" do 
 			u=FactoryGirl.create(:user, invitation_token:nil, email:"junker.junk@junkerjunkjunk.com")
 			Invitation.to_user("junker.junk@junkerjunkjunk.com")

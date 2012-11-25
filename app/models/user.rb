@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 	
 	before_save :hash_new_password, :if=>:password_changed?
 	after_create :consume_token
+	after_create :welcome_email
 	
 	def password_changed?
 		Proc.new { @password.blank? }
@@ -35,6 +36,11 @@ class User < ActiveRecord::Base
 		return unless i=Invitation.find_by_token(self.invitation_token)
 		i.uses=i.uses-1
 		i.save
+	end
+
+	def welcome_email
+		UserMailer.welcome_email(self.email).deliver unless self.registration_of_interest
+		UserMailer.holding_email(self.email).deliver if self.registration_of_interest
 	end
 
 	def self.authenticate(email,password)

@@ -15,7 +15,9 @@ class Invitation < ActiveRecord::Base
 		return nil if email.nil?
 		
 		u=User.find_or_create_by_email(email)
-		Invitation.create(:notes=>"for #{u.email}")
+		i=Invitation.create(:notes=>"for #{u.email}")
+		
+		UserMailer.invitation_email(u,i.token).deliver
 	end
 
 	def self.to_users(number)
