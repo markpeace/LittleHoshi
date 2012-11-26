@@ -1,0 +1,10 @@
+= simple_form_for(@invitation) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :token
+    = f.input :count
+    = f.input :notes
+
+  .form-actions
+    = f.button :submit

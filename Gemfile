@@ -4,6 +4,7 @@ gem 'rails', '3.2.8'
 
 group :test, :development do
 	gem 'sqlite3'
+	gem 'taps'
 end
 group :production do
 	gem 'pg'
@@ -17,15 +18,36 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+#Testing Frameworks
+group :test, :development do
+    gem 'rspec-rails'
+	gem 'factory_girl_rails'
+	gem 'faker'
+	gem 'capybara'
+	gem 'guard-rspec'
+	gem 'shoulda'
+end
+
+group :cucumber do
+    gem 'capybara'
+    gem 'database_cleaner'
+    gem 'cucumber-rails'
+    gem 'cucumber'
+    gem 'spork'
+    gem 'launchy'
+end
+
+#Javascript Executable
 gem 'execjs'
 gem 'therubyracer'
 gem 'jquery-rails'
+
+gem 'bcrypt-ruby'
 
 #Formatting
 gem 'haml-rails'
 gem 'google-webfonts'
 gem 'blueprint-rails'
-
-
+gem 'simple_form'
 
 
