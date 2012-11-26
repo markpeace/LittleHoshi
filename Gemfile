@@ -42,9 +42,12 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'jquery-rails'
 
+gem 'bcrypt-ruby'
+
 #Formatting
 gem 'haml-rails'
 gem 'google-webfonts'
 gem 'blueprint-rails'
+gem 'simple_form'
 
 

@@ -26,7 +26,14 @@
 						.span-2=link_to "Home", root_path
 						.span-2=link_to "The Boxes", "/boxes"
 						.span-2=link_to "Pricing", "/pricing"
-						.span-2=link_to "Login", root_path
-						.span.last-2=link_to "Register", root_path
-					#yield.span-15.last=yield
+						-if user_signed_in?
+							.span-2=link_to "Log out", "/logout"
+							.span.last-2=link_to "My Account", ""
+						-else
+							.span-2=link_to "Login", "/login"
+							.span.last-2=link_to "Register", "/register"
+						
+					#yield.span-15.last
+						=notice
+						=yield
 				.span-1.last &nbsp;
