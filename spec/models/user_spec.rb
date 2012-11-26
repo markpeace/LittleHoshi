@@ -44,9 +44,16 @@ describe User do
 		it "should raise an error when invalid" do
 			FactoryGirl.build(:user, email:"markpeace.com").should_not be_valid
 		end
-		it "should raise an error when duplicated" do
-			FactoryGirl.create(:user, email:"junkyjunk@junkyjunkjunk.com").should be_valid
-			FactoryGirl.build(:user, email:"junkyjunk@junkyjunkjunk.com").should_not be_valid
+		it "should replace an existing registration of interest" do
+			FactoryGirl.create(:user, invitation_token:nil)
+			u=User.last
+			FactoryGirl.build(:user, invitation_token:nil, email:u.email).should be_valid
+			FactoryGirl.create(:user, invitation_token:nil, email:u.email)
+			User.count.should eq(1)
+		end
+		it "should raise an error if the email exists in a full registration" do
+			FactoryGirl.create(:user).should be_valid
+			FactoryGirl.build(:user, email:User.last.email).should_not be_valid
 		end
 	end
 	

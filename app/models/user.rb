@@ -7,8 +7,19 @@ class User < ActiveRecord::Base
 	has_one :invitation, :primary_key=>:token, :foreign_key=>:invitation_token
 
 	validates_presence_of :email
-	validates_uniqueness_of :email
 	validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
+	validate :uniqueness_of_email, :on=>:create
+	def uniqueness_of_email
+		if u=User.find_by_email(self.email)
+			if u.registration_of_interest 
+				u.destroy			
+			else
+				self.errors.add(:email, "A user has already registered with this email")
+			end
+		end
+		self
+	end
+	
 	
 	validates_presence_of :password, :on=>:create, :if=>:check_invitation_token?
 	validates_length_of :password, :in=>5..15, :if=>:check_invitation_token?
