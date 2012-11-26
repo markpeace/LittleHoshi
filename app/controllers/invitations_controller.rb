@@ -1,4 +1,7 @@
 class InvitationsController < ApplicationController
+
+	before_filter :authenticate_admin!
+
   # GET /invitations
   # GET /invitations.json
   def index

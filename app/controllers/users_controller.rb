@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+	before_filter :authenticate_admin!, :except=>[:new, :create]
+
   # GET /users
   # GET /users.json
   def index
