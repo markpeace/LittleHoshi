@@ -33,5 +33,7 @@
 							.span-2=link_to "Login", "/login"
 							.span.last-2=link_to "Register", "/register"
 						
-					#yield.span-15.last=yield
+					#yield.span-15.last
+						=notice
+						=yield
 				.span-1.last &nbsp;

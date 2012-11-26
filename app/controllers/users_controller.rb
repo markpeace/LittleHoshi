@@ -41,8 +41,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
       if @user.save
-		redirect_to "/login", notice: 'You have successfully registered, enter your details below to log in'
-		render json: @user, status: :created, location: @user
+		redirect_to "/login", notice: 'You have successfully registered, enter your details below to log in' unless @user.registration_of_interest
+		redirect_to "/register", notice: 'Thanks. You will be invited to join Little Hoshi soon' if @user.registration_of_interest
       else
         return render :new if @user.invitation_token
         return render :new_registration_of_interest unless @user.invitation_token
