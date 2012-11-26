@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+	@user.email=params[:email]
 	@user.invitation_token = params[:token]
 	@user.invitation_token = nil unless Invitation.find_by_token(@user.invitation_token)
 	render :new_registration_of_interest unless @user.invitation_token
