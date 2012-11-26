@@ -21,7 +21,7 @@ class Invitation < ActiveRecord::Base
 	end
 
 	def self.to_users(number)
-		User.limit(number).each { |u| Invitation.to_user(u.email) }
+		User.where(:registration_of_interest=>true).limit(number).each { |u| Invitation.to_user(u.email) }
 	end
 	
 	def self.consume(token)
