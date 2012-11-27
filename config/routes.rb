@@ -1,13 +1,13 @@
 Littlehoshi::Application.routes.draw do
   
+  match "administer"=>"administer#index"
+
   resources :boxes
 
   resources :invitations
 
   get "sessions/new"
-
   get "sessions/create"
-
   get "sessions/destroy"
 
   resources :users
