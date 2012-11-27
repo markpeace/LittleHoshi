@@ -21,9 +21,11 @@ class User < ActiveRecord::Base
 	end
 	
 	
-	validates_presence_of :password, :on=>:create, :if=>:check_invitation_token?
-	validates_length_of :password, :in=>5..15, :if=>:check_invitation_token?
-	validates_confirmation_of :password, :if=>Proc.new{password_changed? && check_invitation_token? }
+	validates_presence_of :password, :on=>:create
+	validates_length_of :password, :in=>5..15, :on=>:create
+	validates_confirmation_of :password, :if=>:password_changed?
+	
+	validate :check_invitation_token?, :on=>:create
 	
 	before_save :hash_new_password, :if=>:password_changed?
 	after_create :consume_token
