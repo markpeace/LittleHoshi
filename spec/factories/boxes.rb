@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :box do
-    theme "MyString"
-    notes "MyText"
+    sequence(:theme) {|n| "theme#{n}"}
+	notes	"these are some notes" 
   end
 end
