@@ -1,5 +1,7 @@
 Littlehoshi::Application.routes.draw do
   
+  resources :boxes
+
   resources :invitations
 
   get "sessions/new"
