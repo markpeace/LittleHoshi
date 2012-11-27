@@ -28,7 +28,9 @@
 						.span-2=link_to "Pricing", "/pricing"
 						-if user_signed_in?
 							.span-2=link_to "Log out", "/logout"
-							.span.last-2=link_to "My Account", ""
+							.span.last-2
+								=link_to "Administer", "/administer" if current_user.is_admin
+								=link_to "My Account", "" unless current_user.is_admin
 						-else
 							.span-2=link_to "Login", "/login"
 							.span.last-2=link_to "Register", "/register"
