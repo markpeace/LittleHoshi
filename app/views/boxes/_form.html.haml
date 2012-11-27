@@ -1,0 +1,9 @@
+= simple_form_for(@box) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :theme
+    = f.input :notes
+
+  .form-actions
+    = f.button :submit
