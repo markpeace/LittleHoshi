@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :activity do
-    box_id 1
+    association :box_id, :factory=>:box
     name "MyString"
     notes "MyText"
   end

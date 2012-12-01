@@ -6,8 +6,9 @@ describe Activity do
 		FactoryGirl.build(:activity).should be_valid 
 	end
 
-	it { should belong_to(:box).dependent(:destroy) }
-	it { should validate_presence_of(:name).case_insensitive() }
-	it { should validate_uniqueness_of(:name).scope_to(:box_id) }	
+	it { should belong_to(:box) }
+	it { should validate_presence_of(:box) }	
+	it { should validate_presence_of(:name) }
+	it { should validate_uniqueness_of(:name).scoped_to(:box_id).case_insensitive }	
 
 end
