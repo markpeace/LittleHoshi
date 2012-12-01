@@ -6,14 +6,12 @@ describe Box do
 		FactoryGirl.build(:box).should be_valid
 	end
 	
+	
 	describe "It should need a theme, so it " do
-		it "should be invalid without one" do
-			FactoryGirl.build(:box, theme:nil).should_not be_valid
-		end
-		it "should be invalid when duplicated" do 
-			FactoryGirl.create(:box, theme:"test")
-			FactoryGirl.build(:box, theme:"test").should_not be_valid
-		end
+		it { should validate_presence_of(:theme) }
+		it { should validate_uniqueness_of(:theme).case_insensitive }
 	end
+
+	it { should have_many(:activities).dependent(:destroy) }
 
 end
