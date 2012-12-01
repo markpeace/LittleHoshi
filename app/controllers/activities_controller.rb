@@ -28,6 +28,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/new.json
   def new
     @activity = Activity.new
+	@activity.box_id=params[:box_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,15 +46,11 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(params[:activity])
 
-    respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
-        format.json { render json: @activity, status: :created, location: @activity }
+		redirect_to @activity.box
       else
-        format.html { render action: "new" }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
+        render json: @activity.errors, status: :unprocessable_entity 
       end
-    end
   end
 
   # PUT /activities/1
@@ -61,26 +58,21 @@ class ActivitiesController < ApplicationController
   def update
     @activity = Activity.find(params[:id])
 
-    respond_to do |format|
       if @activity.update_attributes(params[:activity])
-        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
-        format.json { head :no_content }
+		redirect_to @activity.box
       else
         format.html { render action: "edit" }
         format.json { render json: @activity.errors, status: :unprocessable_entity }
       end
-    end
+
   end
 
   # DELETE /activities/1
   # DELETE /activities/1.json
   def destroy
     @activity = Activity.find(params[:id])
+	@box = @activity.box
     @activity.destroy
-
-    respond_to do |format|
-      format.html { redirect_to activities_url }
-      format.json { head :no_content }
-    end
+	redirect_to @box
   end
 end
