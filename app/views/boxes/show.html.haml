@@ -7,6 +7,13 @@
   %b Notes:
   = @box.notes
 
+%p
+  %b Activities:
+  %ul
+    -@box.activities.each do |activity|
+      %li=link_to activity.name, activity
+  =link_to 'Create an Activity', new_activity_path(:box_id=>@box)
+
 = link_to 'Edit', edit_box_path(@box)
 \|
 = link_to 'Back', boxes_path

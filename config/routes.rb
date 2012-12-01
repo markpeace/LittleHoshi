@@ -1,5 +1,7 @@
 Littlehoshi::Application.routes.draw do
   
+  resources :activities
+
   match "administer"=>"administer#index"
 
   resources :boxes

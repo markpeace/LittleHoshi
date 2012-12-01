@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Box:
+  = @activity.box.theme
+%p
+  %b Name:
+  = @activity.name
+%p
+  %b Notes:
+  = @activity.notes
+
+= link_to 'Edit', edit_activity_path(@activity)
+\|
+= link_to 'Destroy', @activity, :confirm => 'Are you sure?', :method => :delete
+\|
+= link_to 'Back', @activity.box
