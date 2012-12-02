@@ -29,6 +29,7 @@ class ActivitiesController < ApplicationController
   def new
     @activity = Activity.new
 	@activity.box_id=params[:box_id]
+	1.times { @activity.ingredientisations.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,6 +40,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/1/edit
   def edit
     @activity = Activity.find(params[:id])
+	1.times { @activity.ingredientisations.build }
   end
 
   # POST /activities
@@ -57,7 +59,7 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1.json
   def update
     @activity = Activity.find(params[:id])
-
+	
       if @activity.update_attributes(params[:activity])
 		redirect_to @activity.box
       else

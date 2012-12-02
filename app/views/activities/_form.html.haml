@@ -5,6 +5,12 @@
     = f.hidden_field :box_id
     = f.input :name
     = f.input :notes
+    = f.fields_for :ingredientisations do |i|
+      %p
+        = i.label :ingredient
+        = i.collection_select :ingredient_id, Ingredient.all, :id, :name, {:include_blank=>true}
+        x 
+        = i.text_field :quantity
 
   .form-actions
     = f.button :submit
