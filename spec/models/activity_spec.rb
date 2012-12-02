@@ -5,7 +5,8 @@ describe Activity do
 	it "should create when valid" do
 		FactoryGirl.build(:activity).should be_valid 
 	end
-
+	
+	it { should have_many(:ingredients).through(:ingredientisation) }
 	it { should belong_to(:box) }
 	it { should validate_presence_of(:box) }	
 	it { should validate_presence_of(:name) }
