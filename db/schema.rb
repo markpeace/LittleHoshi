@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202074349) do
+ActiveRecord::Schema.define(:version => 20121127210924) do
 
   create_table "activities", :force => true do |t|
     t.integer  "box_id"
@@ -26,14 +26,6 @@ ActiveRecord::Schema.define(:version => 20121202074349) do
     t.text     "notes"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "ingredients", :force => true do |t|
-    t.string   "name"
-    t.decimal  "unitcost",   :precision => 4, :scale => 2
-    t.integer  "stock",                                    :default => 0
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "invitations", :force => true do |t|
