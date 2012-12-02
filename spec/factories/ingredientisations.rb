@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :ingredientisation do
-    box_id 1
-    ingredient_id 1
+    association :activity_id, :factory=>:activity
+    association :ingredient_id, :factory=>:ingredient
     quantity 1
   end
 end
