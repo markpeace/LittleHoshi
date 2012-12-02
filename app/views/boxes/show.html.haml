@@ -1,12 +1,16 @@
-%p#notice= notice
+%p=link_to "Design Boxes > ", Box
+%h3
+  =@box.theme 
+  .right-align
+    =link_to "Edit", edit_box_path(@box)
+    |
+    =link_to "Destroy", @box, :confirm => 'Are you sure?', :method => :delete
+%p=@box.notes
 
-%p
-  %b Theme:
-  = @box.theme
-%p
-  %b Notes:
-  = @box.notes
 
-= link_to 'Edit', edit_box_path(@box)
-\|
-= link_to 'Back', boxes_path
+%h4	
+  Activities in This Box
+  =link_to '(Add New)', new_activity_path(:box_id=>@box)
+%ul
+  -@box.activities.each do |activity|
+    %li=link_to activity.name, activity

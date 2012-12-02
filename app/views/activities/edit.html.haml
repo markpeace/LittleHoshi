@@ -1,0 +1,10 @@
+%p
+  =link_to "Design Boxes", Box
+  >
+  =link_to @activity.box.theme, @activity.box
+  > Activities >
+  =link_to @activity.name, @activity
+
+%h3 Editing Activity
+
+= render 'form'
