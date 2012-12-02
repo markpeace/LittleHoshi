@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe Ingredient do
-  pending "add some examples to (or delete) #{__FILE__}"
+	it "should create when valid" do
+		FactoryGirl.build(:ingredient).should be_valid
+	end	
+	
+	it { should validate_presence_of(:name) }
+	it { should validate_presence_of(:unitcost) }
+	
+	
 end

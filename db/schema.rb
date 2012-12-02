@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(:version => 20121202074349) do
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
-    t.decimal  "unitcost"
-    t.integer  "stock"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "unitcost",   :precision => 4, :scale => 2
+    t.integer  "stock",                                    :default => 0
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "invitations", :force => true do |t|
