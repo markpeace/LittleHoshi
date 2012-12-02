@@ -1,5 +1,12 @@
 Littlehoshi::Application.routes.draw do
   
+  get "activities/:activity_id/ingredients/new" => "ingredientisations#new"
+  post "ingredientisations" => "ingredientisations#create"
+  get "activities/:activity_id/ingredients/:id/edit" => "ingredientisations#edit"
+  put "ingredientisation.:id" => "ingredientisations#update"
+  delete "activities/:activity_id/ingredients/:id" => "ingredientisations#destroy"
+
+
   resources :ingredients
 
   resources :activities

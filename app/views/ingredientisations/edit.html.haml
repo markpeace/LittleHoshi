@@ -1,0 +1,13 @@
+%p
+  =link_to "Design Boxes", Box
+  >
+  =link_to @ingredientisation.activity.box.theme, @ingredientisation.activity.box
+  >
+  =link_to @ingredientisation.activity.name, @ingredientisation.activity
+  >
+
+%h3 Edit Ingredient
+
+= render 'form'
+
+= link_to 'Back', ingredientisations_path

@@ -10,7 +10,7 @@
 
 %h4	
   Activities in This Box
-  =link_to '(Add)', new_activity_path(:box_id=>@box)
+  =link_to '(Add New)', new_activity_path(:box_id=>@box)
 %ul
   -@box.activities.each do |activity|
     %li=link_to activity.name, activity

@@ -1,17 +1,28 @@
-%p#notice= notice
+%p
+  =link_to "Design Boxes", Box
+  >
+  =link_to @activity.box.theme, @activity.box
+  > Activities
 
-%p
-  %b Box:
-  = @activity.box.theme
-%p
-  %b Name:
-  = @activity.name
-%p
-  %b Notes:
-  = @activity.notes
+%h3
+  =@activity.name
+  .right-align
+    =link_to "Edit", edit_activity_path(@activity)
+    |
+    =link_to "Destroy", @activity, :confirm => 'Are you sure?', :method => :delete
 
-= link_to 'Edit', edit_activity_path(@activity)
-\|
-= link_to 'Destroy', @activity, :confirm => 'Are you sure?', :method => :delete
-\|
-= link_to 'Back', @activity.box
+%p=@activity.notes
+
+%h4
+  Ingredients in this Activity
+  =link_to "(New)", "/activities/#{@activity.id}/ingredients/new"
+%ul
+-@activity.ingredientisations.each do |i|
+  %li
+    =i.ingredient.name
+    x
+    =i.quantity
+    (
+    =link_to "Edit", "/activities/#{@activity.id}/ingredients/#{i.id}/edit"
+    =link_to "Delete", "/activities/#{@activity.id}/ingredients/#{i.id}", :confirm=>"Are You Sure?", :method=>:delete
+    )
