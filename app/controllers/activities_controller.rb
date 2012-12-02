@@ -47,7 +47,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(params[:activity])
 
       if @activity.save
-		redirect_to @activity.box
+		redirect_to @activity
       else
         render json: @activity.errors, status: :unprocessable_entity 
       end
@@ -57,9 +57,9 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1.json
   def update
     @activity = Activity.find(params[:id])
-
+	
       if @activity.update_attributes(params[:activity])
-		redirect_to @activity.box
+		redirect_to @activity
       else
         format.html { render action: "edit" }
         format.json { render json: @activity.errors, status: :unprocessable_entity }

@@ -48,7 +48,7 @@ class BoxesController < ApplicationController
 
     respond_to do |format|
       if @box.save
-        format.html { redirect_to @box, notice: 'Box was successfully created.' }
+        format.html { redirect_to @box }
         format.json { render json: @box, status: :created, location: @box }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class BoxesController < ApplicationController
 
     respond_to do |format|
       if @box.update_attributes(params[:box])
-        format.html { redirect_to @box, notice: 'Box was successfully updated.' }
+        format.html { redirect_to @box }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

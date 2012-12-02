@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127210924) do
+ActiveRecord::Schema.define(:version => 20121202132037) do
 
   create_table "activities", :force => true do |t|
     t.integer  "box_id"
@@ -22,27 +22,43 @@ ActiveRecord::Schema.define(:version => 20121127210924) do
   end
 
   create_table "boxes", :force => true do |t|
-    t.string   "theme"
-    t.text     "notes"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "theme"
+    t.text      "notes"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+  end
+
+  create_table "ingredientisations", :force => true do |t|
+    t.integer  "activity_id"
+    t.integer  "ingredient_id"
+    t.integer  "quantity"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "ingredients", :force => true do |t|
+    t.string   "name"
+    t.decimal  "unitcost",   :precision => 4, :scale => 2
+    t.integer  "stock",                                    :default => 0
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "invitations", :force => true do |t|
-    t.string   "token"
-    t.integer  "uses",       :default => 1
-    t.string   "notes"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string    "token"
+    t.integer   "uses",       :default => 1
+    t.string    "notes"
+    t.timestamp "created_at",                :null => false
+    t.timestamp "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "hashed_password"
-    t.boolean  "is_admin"
-    t.boolean  "registration_of_interest", :default => false
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.string    "email"
+    t.string    "hashed_password"
+    t.boolean   "is_admin"
+    t.boolean   "registration_of_interest", :default => false
+    t.timestamp "created_at",                                  :null => false
+    t.timestamp "updated_at",                                  :null => false
   end
 
 end

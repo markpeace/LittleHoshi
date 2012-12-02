@@ -1,0 +1,10 @@
+= simple_form_for(@ingredientisation) do |f|
+  = f.error_notification
+
+  .form-inputs
+    =f.hidden_field :activity_id
+    =f.input :ingredient_id, :collection=>Ingredient.all
+    =f.input :quantity
+
+  .form-actions
+    = f.button :submit, "Save Ingredient"
