@@ -13,5 +13,12 @@ describe Box do
 	end
 
 	it { should have_many(:activities).dependent(:destroy) }
+	
+	describe "it should have custom methods, so it " do
+		it "should provide a cost summary" do
+			FactoryGirl.create(:activity)
+			Activity.last.cost.should_not be_nil
+		end
+	end
 
 end
