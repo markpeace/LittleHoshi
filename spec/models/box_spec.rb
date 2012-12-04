@@ -13,5 +13,12 @@ describe Box do
 	end
 
 	it { should have_many(:activities).dependent(:destroy) }
-
+	
+	describe "it should have custom methods, so it " do
+		it "should provide a cost summary" do
+			FactoryGirl.create(:ingredientisation)
+			Box.last.cost.to_f.should == 6.66
+		end
+	end
+	
 end

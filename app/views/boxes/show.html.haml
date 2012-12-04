@@ -7,10 +7,17 @@
     =link_to "Destroy", @box, :confirm => 'Are you sure?', :method => :delete
 %p=@box.notes
 
+%h4 
+  Box Cost:
+  =number_to_currency(@box.cost, :unit=>"&pound;")
 
 %h4	
   Activities in This Box
   =link_to '(Add New)', new_activity_path(:box_id=>@box)
 %ul
   -@box.activities.each do |activity|
-    %li=link_to activity.name, activity
+    %li
+      =link_to activity.name, activity
+      (
+      =number_to_currency(activity.cost, :unit=>"&pound;")
+      )

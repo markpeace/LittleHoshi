@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :ingredientisation do
     association :activity_id, :factory=>:activity
     association :ingredient_id, :factory=>:ingredient
-    quantity 1
+    quantity 2
   end
 end
