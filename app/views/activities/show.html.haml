@@ -12,7 +12,9 @@
     =link_to "Destroy", @activity, :confirm => 'Are you sure?', :method => :delete
 
 %p=@activity.notes
-
+%h4
+  Activity Cost:
+  =number_to_currency(@activity.cost, :unit=>"&pound;")
 %h4
   Ingredients in this Activity
   =link_to "(New)", "/activities/#{@activity.id}/ingredients/new"
@@ -22,6 +24,9 @@
     =i.ingredient.name
     x
     =i.quantity
+    = '-'
+    = number_to_currency(i.ingredient.unitcost*i.quantity, :unit=>"&pound;")
+    
     (
     =link_to "Edit", "/activities/#{@activity.id}/ingredients/#{i.id}/edit"
     =link_to "Delete", "/activities/#{@activity.id}/ingredients/#{i.id}", :confirm=>"Are You Sure?", :method=>:delete
