@@ -16,9 +16,9 @@ describe Box do
 	
 	describe "it should have custom methods, so it " do
 		it "should provide a cost summary" do
-			FactoryGirl.create(:activity)
-			Activity.last.cost.should_be > 0
+			FactoryGirl.create(:ingredientisation)
+			Box.last.cost.to_f.should == 6.66
 		end
 	end
-
+	
 end

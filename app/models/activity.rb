@@ -10,4 +10,8 @@ class Activity < ActiveRecord::Base
 	validates_presence_of :name
 	validates_uniqueness_of :name, :scope=>:box_id, :case_sensitive=>false
 
+	def cost
+		self.ingredientisations.reduce(0) { |sum,i| sum + (i.ingredient.unitcost * i.quantity) }
+	end
+
 end
